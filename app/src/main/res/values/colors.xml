@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+
+    <color name="DenimBlue">#3B429F</color>
+    <color name="RichBlack">#0D1B2A</color>
+    <color name="MidnightBlue">#18206F</color>
+    <color name="BabyBlue">#6CCFF6</color>
+    <color name="RussianViolet">#0D0630</color>
+    <color name="LightGray">#F6F6F6</color>
+    <color name="LightCyan">#E0FFFF</color>
+    <color name="gold">#FFD700</color>
+    <color name="silver">#D7D7D7</color>
+    <color name="bronze">#AD8A56</color>
+
+</resources>

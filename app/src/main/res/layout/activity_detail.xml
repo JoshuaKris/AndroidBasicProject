@@ -1,146 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.constraintlayout.motion.widget.MotionLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="18dp"
     android:fitsSystemWindows="true"
-    tools:context=".DetailActivity">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        app:elevation="0dp"
-        android:fitsSystemWindows="true">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            app:statusBarScrim="@android:color/transparent"
-            android:minHeight="150dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
-
-                <ImageView
-                    android:id="@+id/iv_item_image"
-                    android:layout_width="match_parent"
-                    android:layout_centerHorizontal="true"
-                    android:layout_height="300dp"
-                    android:adjustViewBounds="true"
-                    app:layout_collapseMode="parallax"
-                    app:layout_collapseParallaxMultiplier="0.8"
-                    tools:ignore="ContentDescription" />
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/iv_item_image"
-        android:overScrollMode="never"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_anchor="@+id/nestedScrollView"
-            app:layout_anchorGravity="center">
-
-            <TextView
-                android:id="@+id/tv_item_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
-                android:layout_centerHorizontal="true"
-                android:textColor="@color/RichBlack"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                tools:text="Username" />
-
-            <TextView
-                android:id="@+id/tv_item_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_item_username"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/RichBlack"
-                android:textSize="16sp"
-                tools:text="item name" />
-
-            <TextView
-                android:id="@+id/tv_item_following"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_item_name"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/RichBlack"
-                android:textSize="16sp"
-                tools:text="item following" />
-
-            <TextView
-                android:id="@+id/tv_item_follower"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_item_following"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/RichBlack"
-                android:textSize="16sp"
-                tools:text="item follower" />
-
-            <TextView
-                android:id="@+id/tv_item_repository"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_item_follower"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/RichBlack"
-                android:textSize="16sp"
-                tools:text="item repo" />
-
-            <TextView
-                android:id="@+id/tv_item_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_item_repository"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/RichBlack"
-                android:textSize="16sp"
-                tools:text="item location" />
-
-            <TextView
-                android:id="@+id/tv_item_company"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_item_location"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/RichBlack"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                tools:text="item company" />
-
-        </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
-
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_fourth_circle"
-        android:layout_gravity="end"
-        >
+    app:layoutDescription="@xml/activity_detail_scene">
 
         <ImageView
-            android:id="@+id/iv_back_button"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_margin="4dp"
-            android:src="@drawable/ic_arrow_back_black_24dp"
+            android:id="@+id/iv_item_image"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="ContentDescription" />
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/tv_item_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dp"
+            android:textColor="@color/RichBlack"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/iv_item_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Username" />
 
+        <TextView
+            android:id="@+id/tv_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/RichBlack"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_username"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="item name" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <TextView
+            android:id="@+id/tv_item_following"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/RichBlack"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_name"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="item following" />
+
+        <TextView
+            android:id="@+id/tv_item_follower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/RichBlack"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_name"
+            app:layout_constraintStart_toStartOf="@id/tv_item_following"
+            app:layout_constraintEnd_toEndOf="@id/tv_item_repository"
+            tools:text="item follower" />
+
+        <TextView
+            android:id="@+id/tv_item_repository"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/RichBlack"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="item repo" />
+
+        <TextView
+            android:id="@+id/tv_item_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/RichBlack"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_follower"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="item location" />
+
+        <TextView
+            android:id="@+id/tv_item_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/RichBlack"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="item company" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/tv_item_company"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tabs"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

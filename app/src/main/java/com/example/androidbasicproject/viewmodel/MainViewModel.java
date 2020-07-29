@@ -1,41 +1,36 @@
 package com.example.androidbasicproject.viewmodel;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
+import android.app.Application;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.androidbasicproject.model.GithubUsers;
-import com.example.androidbasicproject.utils.CommonUtils;
-import com.google.gson.Gson;
+import com.example.androidbasicproject.model.GithubModel.Users;
+import com.example.androidbasicproject.repository.UserRepository;
 
-public class MainViewModel extends ViewModel {
+public class MainViewModel extends AndroidViewModel {
+    private UserRepository userRepository;
+    private MutableLiveData<String> userSearch = new MutableLiveData<>();
+    private LiveData<Users> userList;
 
-    private MutableLiveData<GithubUsers> itemList = new MutableLiveData<>();
-
-    private final Context context;
-    private CommonUtils commonUtils = new CommonUtils();
-
-    public MainViewModel(Context context) {
-        this.context = context;
+    public MainViewModel(@NonNull Application application) {
+        super(application);
+        userRepository = UserRepository.getInstance(application);
+        userList = userRepository.getUserList();
     }
 
-    public MutableLiveData<GithubUsers> getItemList() {
-        return itemList;
+    public LiveData<String> getSearch() {
+        return userSearch;
     }
 
-    @SuppressLint("DefaultLocale")
-    public void fetchItemList() {
-        String r = commonUtils.loadJSONFromAsset(context, "githubuser.json");
-        if (!r.isEmpty()) {
-            try {
-                Gson gson = new Gson();
-                GithubUsers result = gson.fromJson(r,GithubUsers.class);
-                itemList.setValue(result);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+    public LiveData<Users> getUserList() {
+        return userList;
+    }
+
+    public void searchUser(String name) {
+        userSearch.setValue(name);
+        userRepository.fetchUserList(name);
     }
 }

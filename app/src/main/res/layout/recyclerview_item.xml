@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -29,38 +29,14 @@
             android:layout_toEndOf="@id/iv_item_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="16sp"
             android:textColor="@color/RussianViolet"
             android:textStyle="bold"
             tools:text="username"/>
 
-        <TextView
-            android:id="@+id/item_name"
-            android:layout_below="@id/item_username"
-            android:layout_toEndOf="@id/iv_item_image"
-            android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:textColor="@color/RussianViolet"
-            android:fontFamily="sans-serif"
-            tools:text="name"/>
-
-        <TextView
-            android:id="@+id/tv_item_company"
-            android:layout_marginTop="8dp"
-            android:layout_below="@id/item_name"
-            android:layout_toEndOf="@id/iv_item_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:textColor="@color/RussianViolet"
-            android:fontFamily="sans-serif-medium"
-            android:textSize="12sp"
-            tools:text="company"/>
-
     </RelativeLayout>
 
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>

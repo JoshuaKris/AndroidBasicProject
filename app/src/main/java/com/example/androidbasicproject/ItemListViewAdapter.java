@@ -9,17 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.example.androidbasicproject.model.GithubModel.Items;
+import com.example.androidbasicproject.model.GithubModel.Users;
 import com.example.androidbasicproject.databinding.RecyclerviewItemBinding;
-import com.example.androidbasicproject.model.GithubUsers;
-import com.example.androidbasicproject.model.Users;
 
 public class ItemListViewAdapter extends RecyclerView.Adapter<ItemListViewAdapter.ViewHolder> {
 
-    private final GithubUsers itemList;
+    private final Users itemList;
     private final ItemOnClickListener onClickListener;
     private final Context context;
 
-    ItemListViewAdapter(GithubUsers itemList, ItemOnClickListener onClickListener, Context context) {
+    ItemListViewAdapter(Users itemList, ItemOnClickListener onClickListener, Context context) {
         this.itemList = itemList;
         this.onClickListener = onClickListener;
         this.context = context;
@@ -36,12 +36,12 @@ public class ItemListViewAdapter extends RecyclerView.Adapter<ItemListViewAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.bindData(itemList.getUsers().get(position),context);
+        holder.bindData(itemList.getItems().get(position),context);
     }
 
     @Override
     public int getItemCount() {
-        return Math.max(itemList.getUsers().size(), 0);
+        return Math.max(itemList.getItems().size(), 0);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -55,12 +55,9 @@ public class ItemListViewAdapter extends RecyclerView.Adapter<ItemListViewAdapte
             itemView.setOnClickListener(this);
         }
 
-        void bindData(Users user, Context context) {
-            mBinding.tvItemCompany.setText(user.getCompany());
-            mBinding.itemUsername.setText(user.getUsername());
-            mBinding.itemName.setText(user.getName());
-            int id = itemView.getContext().getResources().getIdentifier(user.getAvatar(), "drawable", context.getPackageName());
-            Glide.with(itemView.getContext()).load(id).placeholder(R.drawable.ic_account_box_black_24dp).circleCrop().into(mBinding.ivItemImage);
+        void bindData(Items user, Context context) {
+            mBinding.itemUsername.setText(user.getLogin());
+            Glide.with(itemView.getContext()).load(user.getAvatarUrl()).placeholder(R.drawable.ic_account_box_black_24dp).circleCrop().into(mBinding.ivItemImage);
         }
 
         @Override

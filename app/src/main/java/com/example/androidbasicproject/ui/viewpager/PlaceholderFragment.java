@@ -56,7 +56,7 @@ public class PlaceholderFragment extends Fragment implements ItemListViewAdapter
                         mBinding.rvFollowList.setLayoutManager(
                                 new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
                         mBinding.rvFollowList.setAdapter(
-                                new ItemListViewAdapter(followList.getFollowList(), PlaceholderFragment.this, getContext()));
+                                new ItemListViewAdapter(followList.getFollowList(), PlaceholderFragment.this));
                     }
                 }
             });
@@ -69,7 +69,7 @@ public class PlaceholderFragment extends Fragment implements ItemListViewAdapter
                         mBinding.rvFollowList.setLayoutManager(
                                 new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
                         mBinding.rvFollowList.setAdapter(
-                                new ItemListViewAdapter(followList.getFollowList(), PlaceholderFragment.this, getContext()));
+                                new ItemListViewAdapter(followList.getFollowList(), PlaceholderFragment.this));
                     }
                 }
             });

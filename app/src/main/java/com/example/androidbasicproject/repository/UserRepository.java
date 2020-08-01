@@ -3,6 +3,7 @@ package com.example.androidbasicproject.repository;
 import android.app.Application;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -65,16 +66,16 @@ public class UserRepository {
         apiCall = InternetService.getServicesApi().getUsers(name,50);
         apiCall.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {
                     Gson gson = new Gson();
-                    Users result = gson.fromJson(response.body(),Users.class);
+                    Users result = gson.fromJson(response.body(), Users.class);
                     userList.setValue(result);
                 }
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                 Toast.makeText(application, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -84,16 +85,16 @@ public class UserRepository {
         apiCall = InternetService.getServicesApi().getUserDetail(name);
         apiCall.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {
                     Gson gson = new Gson();
-                    UserDetail result = gson.fromJson(response.body(),UserDetail.class);
+                    UserDetail result = gson.fromJson(response.body(), UserDetail.class);
                     userDetail.setValue(result);
                 }
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                 Toast.makeText(application, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -103,7 +104,7 @@ public class UserRepository {
         apiCall = InternetService.getServicesApi().getUserFollower(name);
         apiCall.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {
                     Gson gson = new Gson();
                     Type listType = new TypeToken<List<Items>>() {
@@ -115,7 +116,7 @@ public class UserRepository {
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                 Toast.makeText(application, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -125,7 +126,7 @@ public class UserRepository {
         apiCall = InternetService.getServicesApi().getUserFollowing(name);
         apiCall.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
                 if (response.isSuccessful()) {
                     Gson gson = new Gson();
                     Type listType = new TypeToken<List<Items>>() {
@@ -137,7 +138,7 @@ public class UserRepository {
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
                 Toast.makeText(application, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

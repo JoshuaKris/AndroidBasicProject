@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aplikasi Pengguna</string>
+    <string name="search">Pencarian</string>
+    <string name="setting">Pengaturan</string>
+    <string name="follower">Pengikut</string>
+    <string name="following">Mengikuti</string>
+    <string name="detail_page_title">Detil User</string>
+    <string name="mulai_pencarian_anda">Mulai Pencarian anda</string>
+    <string name="search_hint">pencarian pengguna Github</string>
+    <string name="detail_name">Nama : %1$s</string>
+    <string name="detail_following">Mengikuti : %1$d</string>
+    <string name="detail_follower">Pengikut : %1$d</string>
+    <string name="detail_repository">Repository : %1$d</string>
+    <string name="detail_location">Lokasi : %1$s</string>
+</resources>

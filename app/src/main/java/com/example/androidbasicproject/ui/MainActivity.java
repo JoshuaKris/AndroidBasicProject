@@ -41,13 +41,13 @@ public class MainActivity extends AppCompatActivity implements ItemListViewAdapt
         if (searchManager != null) {
             SearchView searchView = (SearchView) (menu.findItem(R.id.search)).getActionView();
             searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-            searchView.setQueryHint("Search Github User");
+            searchView.setQueryHint(getString(R.string.search_hint));
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
                     mBinding.flStart.setVisibility(View.GONE);
                     mBinding.progressCircular.show();
-                    Toast.makeText(MainActivity.this,query,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, query, Toast.LENGTH_SHORT).show();
                     mViewModel.searchUser(query);
                     return true;
                 }
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements ItemListViewAdapt
         if (item.getItemId() == R.id.setting) {
             startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS));
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements ItemListViewAdapt
                     mBinding.rvItemList.setLayoutManager(
                             new LinearLayoutManager(MainActivity.this, RecyclerView.VERTICAL, false));
                     mBinding.rvItemList.setAdapter(
-                            new ItemListViewAdapter(userList.getItems(), MainActivity.this, MainActivity.this));
+                            new ItemListViewAdapter(userList.getItems(), MainActivity.this));
                 }
             }
         });

@@ -1,6 +1,5 @@
 package com.example.androidbasicproject.ui;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +18,10 @@ public class ItemListViewAdapter extends RecyclerView.Adapter<ItemListViewAdapte
 
     private final List<Items> itemList;
     private final ItemOnClickListener onClickListener;
-    private final Context context;
 
-    public ItemListViewAdapter(List<Items> itemList, ItemOnClickListener onClickListener, Context context) {
+    public ItemListViewAdapter(List<Items> itemList, ItemOnClickListener onClickListener) {
         this.itemList = itemList;
         this.onClickListener = onClickListener;
-        this.context = context;
     }
 
     @NonNull
@@ -38,7 +35,7 @@ public class ItemListViewAdapter extends RecyclerView.Adapter<ItemListViewAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.bindData(itemList.get(position), context);
+        holder.bindData(itemList.get(position));
     }
 
     @Override
@@ -57,7 +54,7 @@ public class ItemListViewAdapter extends RecyclerView.Adapter<ItemListViewAdapte
             itemView.setOnClickListener(this);
         }
 
-        void bindData(Items user, Context context) {
+        void bindData(Items user) {
             mBinding.itemUsername.setText(user.getLogin());
             Glide.with(itemView.getContext()).load(user.getAvatarUrl()).placeholder(R.drawable.ic_account_box_black_24dp).circleCrop().into(mBinding.ivItemImage);
         }

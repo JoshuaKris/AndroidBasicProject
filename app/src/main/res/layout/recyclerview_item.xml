@@ -10,33 +10,46 @@
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/iv_item_image"
             android:layout_width="100dp"
             android:layout_height="80dp"
-            tools:ignore="ContentDescription"
-            android:adjustViewBounds="true"/>
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/item_username"
-            android:layout_toEndOf="@id/iv_item_image"
-            android:layout_width="match_parent"
+            android:layout_width="600dp"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:layout_marginStart="10dp"
             android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="16sp"
             android:textColor="@color/RussianViolet"
+            android:textSize="16sp"
             android:textStyle="bold"
-            tools:text="username"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/iv_item_image"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="username" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

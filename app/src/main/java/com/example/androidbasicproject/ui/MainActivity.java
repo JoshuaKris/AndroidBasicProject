@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements ItemListViewAdapt
                 @Override
                 public boolean onQueryTextSubmit(String query) {
                     mBinding.flStart.setVisibility(View.GONE);
+                    mBinding.cvMain.setVisibility(View.GONE);
                     mBinding.progressCircular.show();
                     Toast.makeText(MainActivity.this, query, Toast.LENGTH_SHORT).show();
                     mViewModel.searchUser(query);

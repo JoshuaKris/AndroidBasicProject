@@ -8,6 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
@@ -47,8 +48,11 @@ public class DetailActivity extends AppCompatActivity {
         mBinding.viewPager.setAdapter(sectionsPagerAdapter);
         mBinding.tabs.setupWithViewPager(mBinding.viewPager);
 
+        mBinding.viewPager.setTouchscreenBlocksFocus(true);
+        mBinding.tabs.requestDisallowInterceptTouchEvent(true);
         initLiveData();
     }
+
 
     private void fetchDetail(String name) {
         mViewModel.fetchUserDetail(name);

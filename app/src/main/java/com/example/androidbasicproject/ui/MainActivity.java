@@ -1,12 +1,4 @@
-package com.example.androidbasicproject;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.example.androidbasicproject.ui;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -20,15 +12,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.androidbasicproject.R;
+import com.example.androidbasicproject.databinding.ActivityMainBinding;
 import com.example.androidbasicproject.model.GithubModel.Users;
-import com.example.androidbasicproject.databinding.MainActivityBinding;
 import com.example.androidbasicproject.viewmodel.BaseViewModelFactory;
 import com.example.androidbasicproject.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity implements ItemListViewAdapter.ItemOnClickListener {
 
     private MainViewModel mViewModel;
-    private MainActivityBinding mBinding;
+    private ActivityMainBinding mBinding;
     private Users userList;
 
     @Override
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements ItemListViewAdapt
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
+                    mBinding.flStart.setVisibility(View.GONE);
                     mBinding.progressCircular.show();
                     Toast.makeText(MainActivity.this,query,Toast.LENGTH_SHORT).show();
                     mViewModel.searchUser(query);
@@ -71,13 +73,15 @@ public class MainActivity extends AppCompatActivity implements ItemListViewAdapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mBinding = MainActivityBinding.inflate(getLayoutInflater());
+        mBinding = ActivityMainBinding.inflate(getLayoutInflater());
         View rootView = mBinding.getRoot();
         setContentView(rootView);
 
         BaseViewModelFactory<MainViewModel> baseVMF = new BaseViewModelFactory<>(new MainViewModel(getApplication()));
-        mViewModel = new ViewModelProvider(this,baseVMF).get(MainViewModel.class);
+        mViewModel = new ViewModelProvider(this, baseVMF).get(MainViewModel.class);
 
+        mBinding.cvMain.setVisibility(View.GONE);
+        mBinding.flStart.setVisibility(View.VISIBLE);
         initLiveData();
     }
 
@@ -95,15 +99,14 @@ public class MainActivity extends AppCompatActivity implements ItemListViewAdapt
             @Override
             public void onChanged(Users users) {
                 mBinding.progressCircular.setVisibility(View.GONE);
+                mBinding.cvMain.setVisibility(View.VISIBLE);
                 if (users != null) {
                     userList = users;
                     mBinding.rvItemList.setHasFixedSize(true);
                     mBinding.rvItemList.setLayoutManager(
-                            new LinearLayoutManager(MainActivity.this, RecyclerView.VERTICAL,false));
+                            new LinearLayoutManager(MainActivity.this, RecyclerView.VERTICAL, false));
                     mBinding.rvItemList.setAdapter(
-                            new ItemListViewAdapter(userList, MainActivity.this, MainActivity.this));
-//                    Toast.makeText(MainActivity.this, users.getTotalCount(), Toast.LENGTH_SHORT).show();
-
+                            new ItemListViewAdapter(userList.getItems(), MainActivity.this, MainActivity.this));
                 }
             }
         });
@@ -111,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements ItemListViewAdapt
 
     @Override
     public void onClick(int position) {
-        Toast.makeText(this, "this is " + userList.getItems().get(position), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MainActivity.this,DetailActivity.class);
         intent.putExtra(DetailActivity._USER_DETAIL,userList.getItems().get(position).getLogin());
         startActivity(intent);

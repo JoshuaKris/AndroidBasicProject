@@ -1,12 +1,9 @@
 <resources>
     <string name="app_name">Github User App</string>
-    <string name="title">Github User App</string>
-
     <string name="search">Search</string>
     <string name="setting">Setting</string>
-    <string name="title_activity_detailed">DetailedActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="follower">Follower</string>
+    <string name="following">Following</string>
     <string name="detail_page_title">User Detail</string>
-    <string name="title_activity_inside_detail">InsideDetailActivity</string>
+    <string name="mulai_pencarian_anda">Mulai Pencarian anda</string>
 </resources>

@@ -7,8 +7,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.androidbasicproject.model.GithubDetail.UserDetail;
-import com.example.androidbasicproject.model.GithubList.Follow;
 import com.example.androidbasicproject.model.GithubList.FollowList;
+import com.example.androidbasicproject.model.GithubModel.Items;
 import com.example.androidbasicproject.model.GithubModel.Users;
 import com.example.androidbasicproject.service.InternetService;
 import com.google.gson.Gson;
@@ -106,8 +106,9 @@ public class UserRepository {
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
                     Gson gson = new Gson();
-                    Type listType = new TypeToken<List<Follow>>(){}.getType();
-                    List<Follow> result = gson.fromJson(response.body(),listType);
+                    Type listType = new TypeToken<List<Items>>() {
+                    }.getType();
+                    List<Items> result = gson.fromJson(response.body(), listType);
                     FollowList list = new FollowList(result);
                     userFollower.setValue(list);
                 }
@@ -127,8 +128,9 @@ public class UserRepository {
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
                     Gson gson = new Gson();
-                    Type listType = new TypeToken<List<Follow>>(){}.getType();
-                    List<Follow> result = gson.fromJson(response.body(),listType);
+                    Type listType = new TypeToken<List<Items>>() {
+                    }.getType();
+                    List<Items> result = gson.fromJson(response.body(), listType);
                     FollowList list = new FollowList(result);
                     userFollowing.setValue(list);
                 }

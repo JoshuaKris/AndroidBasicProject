@@ -1,23 +1,22 @@
-package com.example.androidbasicproject;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager.widget.ViewPager;
+package com.example.androidbasicproject.ui;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.bumptech.glide.Glide;
+import com.example.androidbasicproject.R;
+import com.example.androidbasicproject.databinding.ActivityDetailBinding;
 import com.example.androidbasicproject.model.GithubDetail.UserDetail;
 import com.example.androidbasicproject.model.GithubList.FollowList;
-import com.example.androidbasicproject.databinding.ActivityDetailBinding;
-import com.example.androidbasicproject.ui.main.SectionsPagerAdapter;
+import com.example.androidbasicproject.ui.viewpager.SectionsPagerAdapter;
 import com.example.androidbasicproject.viewmodel.BaseViewModelFactory;
 import com.example.androidbasicproject.viewmodel.DetailViewModel;
-import com.google.android.material.tabs.TabLayout;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -70,7 +69,6 @@ public class DetailActivity extends AppCompatActivity {
                     mBinding.tvItemCompany.setText(userDetail.getCompany());
                     Glide.with(DetailActivity.this)
                             .load(userDetail.getAvatarUrl())
-                            .circleCrop()
                             .placeholder(R.drawable.ic_account_box_black_24dp)
                             .into(mBinding.ivItemImage);
                 }

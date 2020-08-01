@@ -1,25 +1,27 @@
-package com.example.androidbasicproject;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+package com.example.androidbasicproject.ui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
-import com.example.androidbasicproject.model.GithubModel.Items;
-import com.example.androidbasicproject.model.GithubModel.Users;
+import com.example.androidbasicproject.R;
 import com.example.androidbasicproject.databinding.RecyclerviewItemBinding;
+import com.example.androidbasicproject.model.GithubModel.Items;
+
+import java.util.List;
 
 public class ItemListViewAdapter extends RecyclerView.Adapter<ItemListViewAdapter.ViewHolder> {
 
-    private final Users itemList;
+    private final List<Items> itemList;
     private final ItemOnClickListener onClickListener;
     private final Context context;
 
-    ItemListViewAdapter(Users itemList, ItemOnClickListener onClickListener, Context context) {
+    public ItemListViewAdapter(List<Items> itemList, ItemOnClickListener onClickListener, Context context) {
         this.itemList = itemList;
         this.onClickListener = onClickListener;
         this.context = context;
@@ -36,12 +38,12 @@ public class ItemListViewAdapter extends RecyclerView.Adapter<ItemListViewAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.bindData(itemList.getItems().get(position),context);
+        holder.bindData(itemList.get(position), context);
     }
 
     @Override
     public int getItemCount() {
-        return Math.max(itemList.getItems().size(), 0);
+        return Math.max(itemList.size(), 0);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -66,7 +68,7 @@ public class ItemListViewAdapter extends RecyclerView.Adapter<ItemListViewAdapte
         }
     }
 
-    interface ItemOnClickListener{
+    public interface ItemOnClickListener {
         void onClick(int position);
     }
 }

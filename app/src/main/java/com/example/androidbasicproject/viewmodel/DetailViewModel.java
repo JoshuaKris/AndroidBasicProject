@@ -4,7 +4,7 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.androidbasicproject.model.GithubDetail.UserDetail;
 import com.example.androidbasicproject.model.GithubList.FollowList;
@@ -12,28 +12,38 @@ import com.example.androidbasicproject.repository.UserRepository;
 
 public class DetailViewModel extends AndroidViewModel {
     private UserRepository userRepository;
-    private LiveData<UserDetail> userDetail;
-    private LiveData<FollowList> userFollower;
-    private LiveData<FollowList> userFollowing;
+    private MutableLiveData<UserDetail> userDetail;
+    private MutableLiveData<FollowList> userFollower;
+    private MutableLiveData<FollowList> userFollowing;
+    private MutableLiveData<Boolean> isViewDestroyed = new MutableLiveData<>();
 
     public DetailViewModel(@NonNull Application application) {
         super(application);
         userRepository = UserRepository.getInstance(application);
-        userDetail = userRepository.getUserDetail();
-        userFollower = userRepository.getUserFollower();
-        userFollowing = userRepository.getUserFollowing();
+        userDetail = (MutableLiveData<UserDetail>) userRepository.getUserDetail();
+        userFollower = (MutableLiveData<FollowList>) userRepository.getUserFollower();
+        userFollowing = (MutableLiveData<FollowList>) userRepository.getUserFollowing();
     }
 
-    public LiveData<UserDetail> getUserDetail() {
+    public MutableLiveData<UserDetail> getUserDetail() {
         return userDetail;
     }
 
-    public LiveData<FollowList> getUserFollower() {
+    public MutableLiveData<FollowList> getUserFollower() {
         return userFollower;
     }
 
-    public LiveData<FollowList> getUserFollowing() {
+    public MutableLiveData<FollowList> getUserFollowing() {
         return userFollowing;
+    }
+
+    public void setIsViewDestroyed(boolean isViewDestroyed) {
+        this.isViewDestroyed.setValue(isViewDestroyed);
+        if (isViewDestroyed) {
+            this.userDetail.setValue(null);
+            this.userFollower.setValue(null);
+            this.userFollowing.setValue(null);
+        }
     }
 
     public void fetchUserDetail(String name) {

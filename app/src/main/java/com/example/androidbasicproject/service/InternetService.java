@@ -1,6 +1,5 @@
 package com.example.androidbasicproject.service;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -20,16 +19,16 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class InternetService {
 
-    @SuppressLint("StaticFieldLeak")
-    private static ChuckerInterceptor chuckerInterceptor;
+    private ChuckerInterceptor chuckerInterceptor;
     private static Retrofit retrofit;
     private static ServicesApi servicesApi;
 
     public InternetService(Context context) {
         chuckerInterceptor = new ChuckerInterceptor(context);
+        initializeRetrofit();
     }
 
-    private static void initializeRetrofit() {
+    private void initializeRetrofit() {
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(chuckerInterceptor)
                 .addInterceptor(new Interceptor() {
@@ -37,7 +36,7 @@ public class InternetService {
                     @Override
                     public Response intercept(@NonNull Chain chain) throws IOException {
                         Request newRequest = chain.request().newBuilder()
-                                .addHeader("Authorization","token " + CommonUtils.API_TOKEN)
+                                .addHeader("Authorization", "token " + CommonUtils.API_TOKEN)
                                 .build();
                         return chain.proceed(newRequest);
                     }
@@ -54,7 +53,6 @@ public class InternetService {
     }
 
     public static ServicesApi getServicesApi() {
-        initializeRetrofit();
         servicesApi = retrofit.create(ServicesApi.class);
         return servicesApi;
     }

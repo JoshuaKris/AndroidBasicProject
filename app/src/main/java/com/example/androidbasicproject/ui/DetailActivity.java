@@ -1,6 +1,5 @@
 package com.example.androidbasicproject.ui;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.example.androidbasicproject.R;
 import com.example.androidbasicproject.databinding.ActivityDetailBinding;
 import com.example.androidbasicproject.model.GithubDetail.UserDetail;
+import com.example.androidbasicproject.model.GithubList.FollowList;
 import com.example.androidbasicproject.ui.viewpager.SectionsPagerAdapter;
 import com.example.androidbasicproject.viewmodel.BaseViewModelFactory;
 import com.example.androidbasicproject.viewmodel.DetailViewModel;
@@ -22,7 +22,6 @@ public class DetailActivity extends AppCompatActivity {
     private DetailViewModel mViewModel;
     private ActivityDetailBinding mBinding;
 
-    @SuppressLint("DefaultLocale")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +29,10 @@ public class DetailActivity extends AppCompatActivity {
         View rootView = mBinding.getRoot();
         setContentView(rootView);
 
+        mBinding.progressCircular.show();
+        mBinding.layoutData.setVisibility(View.GONE);
         BaseViewModelFactory<DetailViewModel> baseVMF = new BaseViewModelFactory<>(new DetailViewModel(getApplication()));
-        mViewModel = new ViewModelProvider(this,baseVMF).get(DetailViewModel.class);
+        mViewModel = new ViewModelProvider(this, baseVMF).get(DetailViewModel.class);
 
         fetchDetail(getIntent().getStringExtra(_USER_DETAIL));
 
@@ -72,6 +73,16 @@ public class DetailActivity extends AppCompatActivity {
                 }
             }
         });
+
+        mViewModel.getUserFollower().observe(this, new Observer<FollowList>() {
+            @Override
+            public void onChanged(FollowList followList) {
+                if (followList != null) {
+                    mBinding.progressCircular.setVisibility(View.GONE);
+                    mBinding.layoutData.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     @Override
@@ -80,4 +91,9 @@ public class DetailActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mViewModel.setIsViewDestroyed(true);
+    }
 }

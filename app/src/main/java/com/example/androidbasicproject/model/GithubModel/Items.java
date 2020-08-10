@@ -79,76 +79,8 @@ public class Items implements Parcelable {
         }
     };
 
-    public int getScore() {
-        return score;
-    }
-
-    public boolean getSiteAdmin() {
-        return siteAdmin;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getReceivedEventsUrl() {
-        return receivedEventsUrl;
-    }
-
-    public String getEventsUrl() {
-        return eventsUrl;
-    }
-
-    public String getReposUrl() {
-        return reposUrl;
-    }
-
-    public String getOrganizationsUrl() {
-        return organizationsUrl;
-    }
-
-    public String getSubscriptionsUrl() {
-        return subscriptionsUrl;
-    }
-
-    public String getStarredUrl() {
-        return starredUrl;
-    }
-
-    public String getGistsUrl() {
-        return gistsUrl;
-    }
-
-    public String getFollowingUrl() {
-        return followingUrl;
-    }
-
-    public String getFollowersUrl() {
-        return followersUrl;
-    }
-
-    public String getHtmlUrl() {
-        return htmlUrl;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getGravatarId() {
-        return gravatarId;
-    }
-
     public String getAvatarUrl() {
         return avatarUrl;
-    }
-
-    public String getNodeId() {
-        return nodeId;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getLogin() {

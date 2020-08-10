@@ -38,14 +38,6 @@ public class Users implements Parcelable {
         return items;
     }
 
-    public boolean getIncompleteResults() {
-        return incompleteResults;
-    }
-
-    public int getTotalCount() {
-        return totalCount;
-    }
-
     @Override
     public int describeContents() {
         return 0;

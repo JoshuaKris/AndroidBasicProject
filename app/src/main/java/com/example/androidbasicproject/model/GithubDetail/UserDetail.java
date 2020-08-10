@@ -119,14 +119,6 @@ public class UserDetail implements Parcelable {
         }
     };
 
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
     public int getFollowing() {
         return following;
     }
@@ -135,36 +127,12 @@ public class UserDetail implements Parcelable {
         return followers;
     }
 
-    public int getPublicGists() {
-        return publicGists;
-    }
-
     public int getPublicRepos() {
         return publicRepos;
     }
 
-    public String getTwitterUsername() {
-        return twitterUsername;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public String getHireable() {
-        return hireable;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
     public String getLocation() {
         return location;
-    }
-
-    public String getBlog() {
-        return blog;
     }
 
     public String getCompany() {
@@ -175,72 +143,8 @@ public class UserDetail implements Parcelable {
         return name;
     }
 
-    public boolean getSiteAdmin() {
-        return siteAdmin;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getReceivedEventsUrl() {
-        return receivedEventsUrl;
-    }
-
-    public String getEventsUrl() {
-        return eventsUrl;
-    }
-
-    public String getReposUrl() {
-        return reposUrl;
-    }
-
-    public String getOrganizationsUrl() {
-        return organizationsUrl;
-    }
-
-    public String getSubscriptionsUrl() {
-        return subscriptionsUrl;
-    }
-
-    public String getStarredUrl() {
-        return starredUrl;
-    }
-
-    public String getGistsUrl() {
-        return gistsUrl;
-    }
-
-    public String getFollowingUrl() {
-        return followingUrl;
-    }
-
-    public String getFollowersUrl() {
-        return followersUrl;
-    }
-
-    public String getHtmlUrl() {
-        return htmlUrl;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getGravatarId() {
-        return gravatarId;
-    }
-
     public String getAvatarUrl() {
         return avatarUrl;
-    }
-
-    public String getNodeId() {
-        return nodeId;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getLogin() {

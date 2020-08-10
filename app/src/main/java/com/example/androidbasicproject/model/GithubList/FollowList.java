@@ -21,10 +21,6 @@ public class FollowList implements Parcelable {
         followList = in.createTypedArrayList(Items.CREATOR);
     }
 
-    public static Creator<FollowList> getCREATOR() {
-        return CREATOR;
-    }
-
     public List<Items> getFollowList() {
         return followList;
     }

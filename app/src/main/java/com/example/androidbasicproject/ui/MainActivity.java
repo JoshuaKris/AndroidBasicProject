@@ -15,7 +15,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -87,28 +86,22 @@ public class MainActivity extends AppCompatActivity implements ItemListViewAdapt
     }
 
     private void initLiveData() {
-        mViewModel.getSearch().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                if (s != null) {
-                    Log.d("getSearch", "onChanged: " + s);
-                }
+        mViewModel.getSearch().observe(this, s -> {
+            if (s != null) {
+                Log.d("getSearch", "onChanged: " + s);
             }
         });
 
-        mViewModel.getUserList().observe(this, new Observer<Users>() {
-            @Override
-            public void onChanged(Users users) {
-                mBinding.progressCircular.setVisibility(View.GONE);
-                mBinding.cvMain.setVisibility(View.VISIBLE);
-                if (users != null) {
-                    userList = users;
-                    mBinding.rvItemList.setHasFixedSize(true);
-                    mBinding.rvItemList.setLayoutManager(
-                            new LinearLayoutManager(MainActivity.this, RecyclerView.VERTICAL, false));
-                    mBinding.rvItemList.setAdapter(
-                            new ItemListViewAdapter(userList.getItems(), MainActivity.this));
-                }
+        mViewModel.getUserList().observe(this, users -> {
+            mBinding.progressCircular.setVisibility(View.GONE);
+            mBinding.cvMain.setVisibility(View.VISIBLE);
+            if (users != null) {
+                userList = users;
+                mBinding.rvItemList.setHasFixedSize(true);
+                mBinding.rvItemList.setLayoutManager(
+                        new LinearLayoutManager(MainActivity.this, RecyclerView.VERTICAL, false));
+                mBinding.rvItemList.setAdapter(
+                        new ItemListViewAdapter(userList.getItems(), MainActivity.this));
             }
         });
     }

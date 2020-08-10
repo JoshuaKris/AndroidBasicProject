@@ -7,13 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidbasicproject.databinding.FragmentInsideDetailBinding;
-import com.example.androidbasicproject.model.GithubList.FollowList;
 import com.example.androidbasicproject.ui.ItemListViewAdapter;
 import com.example.androidbasicproject.viewmodel.DetailViewModel;
 
@@ -47,10 +45,9 @@ public class PlaceholderFragment extends Fragment implements ItemListViewAdapter
     }
 
     private void initLiveData() {
-        if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
-            mViewModel.getUserFollower().observe(getViewLifecycleOwner(), new Observer<FollowList>() {
-                @Override
-                public void onChanged(FollowList followList) {
+        if (getArguments() != null) {
+            if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
+                mViewModel.getUserFollower().observe(getViewLifecycleOwner(), followList -> {
                     if (followList != null) {
                         mBinding.rvFollowList.setHasFixedSize(true);
                         mBinding.rvFollowList.setLayoutManager(
@@ -58,12 +55,9 @@ public class PlaceholderFragment extends Fragment implements ItemListViewAdapter
                         mBinding.rvFollowList.setAdapter(
                                 new ItemListViewAdapter(followList.getFollowList(), PlaceholderFragment.this));
                     }
-                }
-            });
-        } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
-            mViewModel.getUserFollowing().observe(getViewLifecycleOwner(), new Observer<FollowList>() {
-                @Override
-                public void onChanged(FollowList followList) {
+                });
+            } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
+                mViewModel.getUserFollowing().observe(getViewLifecycleOwner(), followList -> {
                     if (followList != null) {
                         mBinding.rvFollowList.setHasFixedSize(true);
                         mBinding.rvFollowList.setLayoutManager(
@@ -71,8 +65,8 @@ public class PlaceholderFragment extends Fragment implements ItemListViewAdapter
                         mBinding.rvFollowList.setAdapter(
                                 new ItemListViewAdapter(followList.getFollowList(), PlaceholderFragment.this));
                     }
-                }
-            });
+                });
+            }
         }
     }
 

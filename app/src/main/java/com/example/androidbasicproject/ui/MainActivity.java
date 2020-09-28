@@ -4,7 +4,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -64,7 +63,8 @@ public class MainActivity extends AppCompatActivity implements ItemListViewAdapt
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.setting) {
-            startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS));
+//            startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS));
+            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

@@ -1,12 +1,16 @@
 package com.example.androidbasicproject.repository;
 
 import android.app.Application;
+import android.os.AsyncTask;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.androidbasicproject.database.UserDao;
+import com.example.androidbasicproject.database.UserDatabase;
+import com.example.androidbasicproject.database.UserEntity;
 import com.example.androidbasicproject.model.GithubDetail.UserDetail;
 import com.example.androidbasicproject.model.GithubList.FollowList;
 import com.example.androidbasicproject.model.GithubModel.Items;
@@ -24,8 +28,12 @@ import retrofit2.Response;
 
 public class UserRepository {
 
+    private UserDao userDao;
+    private LiveData<List<UserEntity>> allUsers;
+
     private static UserRepository instance;
     private final Application application;
+
     private final InternetService internetService;
     private Call<String> apiCall;
 
@@ -44,6 +52,9 @@ public class UserRepository {
     public UserRepository(Application application) {
         this.application = application;
         internetService = new InternetService(application);
+        UserDatabase database = UserDatabase.getInstance(application);
+        userDao = database.userDao();
+        allUsers = userDao.getAllUser();
     }
 
     public LiveData<Users> getUserList() {
@@ -142,5 +153,81 @@ public class UserRepository {
                 Toast.makeText(application, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void insert(UserEntity userEntity) {
+        new InsertUserAsyncTask(userDao).execute(userEntity);
+    }
+
+    public void update(UserEntity userEntity) {
+        new UpdateUserAsyncTask(userDao).execute(userEntity);
+    }
+
+    public void delete(UserEntity userEntity) {
+        new DeleteUserAsyncTask(userDao).execute(userEntity);
+    }
+
+    public void deleteAllUser() {
+        new DeleteAllUserAsyncTask(userDao).execute();
+    }
+
+    public LiveData<List<UserEntity>> getAllUsers() {
+        return allUsers;
+    }
+
+    private static class InsertUserAsyncTask extends AsyncTask<UserEntity, Void, Void> {
+        private UserDao userDao;
+
+        private InsertUserAsyncTask(UserDao userDao) {
+            this.userDao = userDao;
+        }
+
+        @Override
+        protected Void doInBackground(UserEntity... userEntities) {
+            userDao.insert(userEntities[0]);
+            return null;
+        }
+    }
+
+    private static class UpdateUserAsyncTask extends AsyncTask<UserEntity, Void, Void> {
+        private UserDao userDao;
+
+        private UpdateUserAsyncTask(UserDao userDao) {
+            this.userDao = userDao;
+        }
+
+        @Override
+        protected Void doInBackground(UserEntity... userEntities) {
+            userDao.update(userEntities[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteUserAsyncTask extends AsyncTask<UserEntity, Void, Void> {
+        private UserDao userDao;
+
+        private DeleteUserAsyncTask(UserDao userDao) {
+            this.userDao = userDao;
+        }
+
+        @Override
+        protected Void doInBackground(UserEntity... userEntities) {
+            userDao.delete(userEntities[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAllUserAsyncTask extends AsyncTask<Void, Void, Void> {
+        private UserDao userDao;
+
+        private DeleteAllUserAsyncTask(UserDao userDao) {
+            this.userDao = userDao;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            userDao.deleteAll();
+            return null;
+        }
     }
 }

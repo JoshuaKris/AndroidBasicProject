@@ -2,12 +2,14 @@ package com.example.androidbasicproject.ui;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.androidbasicproject.R;
+import com.example.androidbasicproject.database.UserEntity;
 import com.example.androidbasicproject.databinding.ActivityDetailBinding;
 import com.example.androidbasicproject.ui.viewpager.SectionsPagerAdapter;
 import com.example.androidbasicproject.viewmodel.BaseViewModelFactory;
@@ -72,6 +74,14 @@ public class DetailActivity extends AppCompatActivity {
             if (followList != null) {
                 mBinding.progressCircular.setVisibility(View.GONE);
                 mBinding.layoutData.setVisibility(View.VISIBLE);
+            }
+        });
+
+        mViewModel.getUser().observe(this, userEntities -> {
+            if (userEntities != null) {
+                for (UserEntity user : userEntities) {
+                    Toast.makeText(this, user.getName(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

@@ -13,4 +13,10 @@
     <string name="detail_follower">Pengikut : %1$d</string>
     <string name="detail_repository">Repository : %1$d</string>
     <string name="detail_location">Lokasi : %1$s</string>
+
+    <string name="title_activity_settings">Pengaturan</string>
+
+    <!-- Language -->
+    <string name="lang">Ganti Bahasa</string>
+    <string name="lang_title">Bahasa</string>
 </resources>

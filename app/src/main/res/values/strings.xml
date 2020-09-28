@@ -13,4 +13,10 @@
     <string name="detail_follower">Follower : %1$d</string>
     <string name="detail_repository">Repository : %1$d</string>
     <string name="detail_location">Location : %1$s</string>
+
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Language -->
+    <string name="lang">Change Language</string>
+    <string name="lang_title">Language</string>
 </resources>

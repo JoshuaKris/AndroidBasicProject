@@ -4,17 +4,22 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.androidbasicproject.database.UserEntity;
 import com.example.androidbasicproject.model.GithubDetail.UserDetail;
 import com.example.androidbasicproject.model.GithubList.FollowList;
 import com.example.androidbasicproject.repository.UserRepository;
+
+import java.util.List;
 
 public class DetailViewModel extends AndroidViewModel {
     private UserRepository userRepository;
     private MutableLiveData<UserDetail> userDetail;
     private MutableLiveData<FollowList> userFollower;
     private MutableLiveData<FollowList> userFollowing;
+    private LiveData<List<UserEntity>> users;
     private MutableLiveData<Boolean> isViewDestroyed = new MutableLiveData<>();
 
     public DetailViewModel(@NonNull Application application) {
@@ -23,6 +28,7 @@ public class DetailViewModel extends AndroidViewModel {
         userDetail = (MutableLiveData<UserDetail>) userRepository.getUserDetail();
         userFollower = (MutableLiveData<FollowList>) userRepository.getUserFollower();
         userFollowing = (MutableLiveData<FollowList>) userRepository.getUserFollowing();
+        users = userRepository.getAllUsers();
     }
 
     public MutableLiveData<UserDetail> getUserDetail() {
@@ -35,6 +41,10 @@ public class DetailViewModel extends AndroidViewModel {
 
     public MutableLiveData<FollowList> getUserFollowing() {
         return userFollowing;
+    }
+
+    public LiveData<List<UserEntity>> getUser() {
+        return users;
     }
 
     public void setIsViewDestroyed(boolean isViewDestroyed) {

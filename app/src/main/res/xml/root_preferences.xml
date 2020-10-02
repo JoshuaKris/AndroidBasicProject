@@ -3,8 +3,20 @@
     <PreferenceCategory app:title="@string/lang_title">
 
         <Preference
+            app:icon="@drawable/ic_sharp_translate_24"
             app:key="language"
+            app:summary="Change languaage you want (indonesian, english)"
             app:title="@string/lang" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Alarm Manager">
+
+        <SwitchPreference
+            app:icon="@drawable/ic_baseline_notifications_24"
+            app:key="alarm"
+            app:summary="Activating alarm at 9 AM"
+            app:title="Alarm" />
 
     </PreferenceCategory>
 

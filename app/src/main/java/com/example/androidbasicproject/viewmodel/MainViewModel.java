@@ -33,4 +33,8 @@ public class MainViewModel extends AndroidViewModel {
         userSearch.setValue(name);
         userRepository.fetchUserList(name);
     }
+
+    public void checkThisUser(String login) {
+        userRepository.checkThisUser(login);
+    }
 }

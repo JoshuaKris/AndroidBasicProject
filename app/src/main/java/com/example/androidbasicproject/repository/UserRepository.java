@@ -30,6 +30,7 @@ public class UserRepository {
 
     private UserDao userDao;
     private LiveData<List<UserEntity>> allUsers;
+    private LiveData<Boolean> thisUser;
 
     private static UserRepository instance;
     private final Application application;
@@ -61,15 +62,15 @@ public class UserRepository {
         return userList;
     }
 
-    public LiveData<UserDetail> getUserDetail() {
+    public MutableLiveData<UserDetail> getUserDetail() {
         return userDetail;
     }
 
-    public LiveData<FollowList> getUserFollower() {
+    public MutableLiveData<FollowList> getUserFollower() {
         return userFollower;
     }
 
-    public LiveData<FollowList> getUserFollowing() {
+    public MutableLiveData<FollowList> getUserFollowing() {
         return userFollowing;
     }
 
@@ -173,6 +174,14 @@ public class UserRepository {
 
     public LiveData<List<UserEntity>> getAllUsers() {
         return allUsers;
+    }
+
+    public void checkThisUser(String login) {
+        thisUser = userDao.check(login);
+    }
+
+    public LiveData<Boolean> getThisUser() {
+        return thisUser;
     }
 
     private static class InsertUserAsyncTask extends AsyncTask<UserEntity, Void, Void> {

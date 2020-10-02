@@ -43,4 +43,11 @@ public class SettingsActivity extends AppCompatActivity {
             return false;
         }
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        this.finish();
+        return true;
+    }
+
 }

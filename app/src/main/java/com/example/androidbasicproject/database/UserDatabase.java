@@ -10,7 +10,7 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 //need to learn migration strategy
-@Database(entities = {UserEntity.class}, version = 1)
+@Database(entities = {UserEntity.class}, version = 1, exportSchema = false)
 public abstract class UserDatabase extends RoomDatabase {
 
     private static UserDatabase instance;
@@ -47,6 +47,7 @@ public abstract class UserDatabase extends RoomDatabase {
         protected Void doInBackground(Void... voids) {
             userDao.insert(new UserEntity(
                     4090245,
+                    "sidiqpermana",
                     "Sidiq Permana",
                     "https://avatars1.githubusercontent.com/u/4090245?v=4",
                     "Jakarta Indonesia",

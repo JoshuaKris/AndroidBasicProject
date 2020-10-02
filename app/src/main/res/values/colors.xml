@@ -6,4 +6,5 @@
     <color name="RichBlack">#0D1B2A</color>
     <color name="RussianViolet">#0D0630</color>
     <color name="LightGray">#F6F6F6</color>
+    <color name="colorRipple">#818181</color>
 </resources>

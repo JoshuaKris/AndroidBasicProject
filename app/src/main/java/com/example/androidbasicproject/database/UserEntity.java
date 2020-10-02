@@ -1,5 +1,6 @@
 package com.example.androidbasicproject.database;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -8,19 +9,21 @@ public class UserEntity {
 
     @PrimaryKey()
     private int id;
+    private String login;
     private String name;
-    private String avatar_url;
+    private String avatarUrl;
     private String location;
-    private int public_repos;
+    private int publicRepos;
     private int followers;
     private int following;
 
-    public UserEntity(int id, String name, String avatar_url, String location, int public_repos, int followers, int following) {
+    public UserEntity(int id, String login, String name, String avatarUrl, String location, int publicRepos, int followers, int following) {
         this.id = id;
+        this.login = login;
         this.name = name;
-        this.avatar_url = avatar_url;
+        this.avatarUrl = avatarUrl;
         this.location = location;
-        this.public_repos = public_repos;
+        this.publicRepos = publicRepos;
         this.followers = followers;
         this.following = following;
     }
@@ -29,20 +32,24 @@ public class UserEntity {
         return id;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
     public String getName() {
         return name;
     }
 
-    public String getAvatar_url() {
-        return avatar_url;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
     public String getLocation() {
         return location;
     }
 
-    public int getPublic_repos() {
-        return public_repos;
+    public int getPublicRepos() {
+        return publicRepos;
     }
 
     public int getFollowers() {
@@ -51,5 +58,20 @@ public class UserEntity {
 
     public int getFollowing() {
         return following;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", name='" + name + '\'' +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", location='" + location + '\'' +
+                ", publicRepos=" + publicRepos +
+                ", followers=" + followers +
+                ", following=" + following +
+                '}';
     }
 }

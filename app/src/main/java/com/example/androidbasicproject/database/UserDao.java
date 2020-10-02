@@ -24,7 +24,9 @@ public interface UserDao {
     @Delete
     void delete(UserEntity userEntity);
 
-    //maybe used
+    @Query("SELECT EXISTS(SELECT * FROM user_table WHERE login = :login)")
+    LiveData<Boolean> check(String login);
+
     @Query("DELETE FROM user_table")
     void deleteAll();
 }

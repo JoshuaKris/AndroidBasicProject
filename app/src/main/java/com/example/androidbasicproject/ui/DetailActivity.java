@@ -2,7 +2,6 @@ package com.example.androidbasicproject.ui;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,6 +19,8 @@ public class DetailActivity extends AppCompatActivity {
     public static final String _USER_DETAIL = "_user_detail";
     private DetailViewModel mViewModel;
     private ActivityDetailBinding mBinding;
+    private boolean statusFavorite = false;
+    private UserEntity userEntity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,31 @@ public class DetailActivity extends AppCompatActivity {
         mBinding.viewPager.setAdapter(sectionsPagerAdapter);
         mBinding.tabs.setupWithViewPager(mBinding.viewPager);
 
+        mBinding.fab.setOnClickListener(v -> {
+            statusFavorite = !statusFavorite;
+            setFavorite(statusFavorite);
+            setButton(statusFavorite);
+        });
+
         initLiveData();
+    }
+
+    private void setFavorite(boolean statusFavorite) {
+        if (statusFavorite) {
+            //insert
+            mViewModel.insertToDB(userEntity);
+        } else {
+            //delete
+            mViewModel.deleteFromDB(userEntity);
+        }
+    }
+
+    private void setButton(boolean statusFavorite) {
+        if (statusFavorite) {
+            mBinding.fab.setImageResource(R.drawable.ic_baseline_favorite_24);
+        } else {
+            mBinding.fab.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+        }
     }
 
     private void fetchDetail(String name) {
@@ -67,6 +92,18 @@ public class DetailActivity extends AppCompatActivity {
                         .load(userDetail.getAvatarUrl())
                         .placeholder(R.drawable.ic_account_box_black_24dp)
                         .into(mBinding.ivItemImage);
+
+                //region create UserEntity
+                this.userEntity = new UserEntity(
+                        userDetail.getId(),
+                        userDetail.getLogin(),
+                        userDetail.getName(),
+                        userDetail.getAvatarUrl(),
+                        userDetail.getLocation(),
+                        userDetail.getPublicRepos(),
+                        userDetail.getFollowers(),
+                        userDetail.getFollowing());
+                //endregion
             }
         });
 
@@ -77,12 +114,9 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        mViewModel.getUser().observe(this, userEntities -> {
-            if (userEntities != null) {
-                for (UserEntity user : userEntities) {
-                    Toast.makeText(this, user.getName(), Toast.LENGTH_SHORT).show();
-                }
-            }
+        mViewModel.getUser().observe(this, aBoolean -> {
+            statusFavorite = aBoolean;
+            setButton(statusFavorite);
         });
     }
 

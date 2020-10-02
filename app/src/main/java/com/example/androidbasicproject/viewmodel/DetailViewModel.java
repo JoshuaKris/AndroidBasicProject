@@ -12,23 +12,21 @@ import com.example.androidbasicproject.model.GithubDetail.UserDetail;
 import com.example.androidbasicproject.model.GithubList.FollowList;
 import com.example.androidbasicproject.repository.UserRepository;
 
-import java.util.List;
-
 public class DetailViewModel extends AndroidViewModel {
     private UserRepository userRepository;
     private MutableLiveData<UserDetail> userDetail;
     private MutableLiveData<FollowList> userFollower;
     private MutableLiveData<FollowList> userFollowing;
-    private LiveData<List<UserEntity>> users;
+    private LiveData<Boolean> user;
     private MutableLiveData<Boolean> isViewDestroyed = new MutableLiveData<>();
 
     public DetailViewModel(@NonNull Application application) {
         super(application);
         userRepository = UserRepository.getInstance(application);
-        userDetail = (MutableLiveData<UserDetail>) userRepository.getUserDetail();
-        userFollower = (MutableLiveData<FollowList>) userRepository.getUserFollower();
-        userFollowing = (MutableLiveData<FollowList>) userRepository.getUserFollowing();
-        users = userRepository.getAllUsers();
+        userDetail = userRepository.getUserDetail();
+        userFollower = userRepository.getUserFollower();
+        userFollowing = userRepository.getUserFollowing();
+        user = userRepository.getThisUser();
     }
 
     public MutableLiveData<UserDetail> getUserDetail() {
@@ -43,8 +41,11 @@ public class DetailViewModel extends AndroidViewModel {
         return userFollowing;
     }
 
-    public LiveData<List<UserEntity>> getUser() {
-        return users;
+    public LiveData<Boolean> getUser() {
+        if (user == null) {
+            user = new MutableLiveData<>();
+        }
+        return user;
     }
 
     public void setIsViewDestroyed(boolean isViewDestroyed) {
@@ -53,6 +54,7 @@ public class DetailViewModel extends AndroidViewModel {
             this.userDetail.setValue(null);
             this.userFollower.setValue(null);
             this.userFollowing.setValue(null);
+            this.user = new MutableLiveData<>();
         }
     }
 
@@ -67,4 +69,13 @@ public class DetailViewModel extends AndroidViewModel {
     public void fetchUserFollowing(String name) {
         userRepository.fetchUserFollowing(name);
     }
+
+    public void insertToDB(UserEntity userEntity) {
+        userRepository.insert(userEntity);
+    }
+
+    public void deleteFromDB(UserEntity userEntity) {
+        userRepository.delete(userEntity);
+    }
+
 }

@@ -63,8 +63,9 @@ public class MainActivity extends AppCompatActivity implements ItemListViewAdapt
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.setting) {
-//            startActivity(new Intent(Settings.ACTION_LOCALE_SETTINGS));
             startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+        } else if (item.getItemId() == R.id.favorites) {
+            startActivity(new Intent(MainActivity.this, FavoritesActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements ItemListViewAdapt
         });
 
         mViewModel.getUserList().observe(this, users -> {
-            mBinding.progressCircular.setVisibility(View.GONE);
+            mBinding.progressCircular.hide();
             mBinding.cvMain.setVisibility(View.VISIBLE);
             if (users != null) {
                 userList = users;
@@ -106,10 +107,15 @@ public class MainActivity extends AppCompatActivity implements ItemListViewAdapt
         });
     }
 
+    private void checkDB(String login) {
+        mViewModel.checkThisUser(login);
+    }
+
     @Override
     public void onClick(int position) {
-        Intent intent = new Intent(MainActivity.this,DetailActivity.class);
-        intent.putExtra(DetailActivity._USER_DETAIL,userList.getItems().get(position).getLogin());
+        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+        intent.putExtra(DetailActivity._USER_DETAIL, userList.getItems().get(position).getLogin());
+        checkDB(userList.getItems().get(position).getLogin());
         startActivity(intent);
     }
 }

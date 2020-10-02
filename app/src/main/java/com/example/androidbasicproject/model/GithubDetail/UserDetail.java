@@ -151,6 +151,10 @@ public class UserDetail implements Parcelable {
         return login;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public int describeContents() {
         return 0;

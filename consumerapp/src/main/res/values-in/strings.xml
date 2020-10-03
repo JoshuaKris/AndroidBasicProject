@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aplikasi Konsumsi</string>
+    <string name="search">Pencarian</string>
+    <string name="setting">Pengaturan</string>
+    <string name="favorites">Favorit</string>
+    <string name="follower">Pengikut</string>
+    <string name="following">Mengikuti</string>
+    <string name="detail_page_title">Detil User</string>
+    <string name="mulai_pencarian_anda">Mulai Pencarian anda</string>
+    <string name="search_hint">pencarian pengguna Github</string>
+    <string name="detail_name">Nama : %1$s</string>
+    <string name="detail_following">Mengikuti : %1$d</string>
+    <string name="detail_follower">Pengikut : %1$d</string>
+    <string name="detail_repository">Repository : %1$d</string>
+    <string name="detail_location">Lokasi : %1$s</string>
+
+    <string name="title_activity_settings">Pengaturan</string>
+
+    <!-- Language -->
+    <string name="lang">Ganti Bahasa</string>
+    <string name="lang_title">Bahasa</string>
+
+    <!-- Fav Page -->
+    <string name="favorite_page">Halaman Favorit</string>
+    <string name="warning_text">Peringatan !!</string>
+    <string name="warning_subtext">Apakah anda yakin untuk menghapus seluruh user favorit? \nSaat dihapus, akan hilang selamanya</string>
+    <string name="yes_text">Ya</string>
+    <string name="cancel_text">Batal</string>
+    <string name="no_favorite_text">Tidak Ada Favorit</string>
+</resources>

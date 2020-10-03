@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Consumer App</string>
+    <string name="search">Search</string>
+    <string name="setting">Setting</string>
+    <string name="favorites">Favorites</string>
+    <string name="follower">Follower</string>
+    <string name="following">Following</string>
+    <string name="detail_page_title">User Detail</string>
+    <string name="mulai_pencarian_anda">Start your search</string>
+    <string name="search_hint">Search Github User</string>
+    <string name="detail_name">Name : %1$s</string>
+    <string name="detail_following">Following : %1$d</string>
+    <string name="detail_follower">Follower : %1$d</string>
+    <string name="detail_repository">Repository : %1$d</string>
+    <string name="detail_location">Location : %1$s</string>
+
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Language -->
+    <string name="lang">Change Language</string>
+    <string name="lang_title">Language</string>
+
+    <!-- Fav Page -->
+    <string name="favorite_page">Favorites Page</string>
+    <string name="warning_text">Warning !!</string>
+    <string name="warning_subtext">Are you sure want to delete all favorites user? \nOnce deleted, it will gone forever</string>
+    <string name="yes_text">Yes</string>
+    <string name="cancel_text">Cancel</string>
+    <string name="no_favorite_text">No Favorite</string>
+</resources>
